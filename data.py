@@ -138,19 +138,6 @@ class MeetingAttendees(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     user_presence = Column(String(1024, convert_unicode=True))
 
-
-class MeetingMessages(Base):
-    __tablename__ = "meeting_messages"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    meeting_instance_id = Column(Integer, ForeignKey('meeting_instance.id'))
-    slack_user_id = Column(String(255, convert_unicode=True), nullable=False)
-    slack_team_id = Column(String(255, convert_unicode=True))
-    message_time = Column(Integer, nullable=False)
-    thread_message_time = Column(Integer)
-    slack_parent_user_id = Column(String(255, convert_unicode=True))
-    message = Column(String(4096, convert_unicode=True), nullable=False)
-
-
 def get_configurations():
     configurations = db_session.query(Configuration)
     if configurations.count() > 0:
